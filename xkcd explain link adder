@@ -1,0 +1,22 @@
+// ==UserScript==
+// @name         xkcd Explain
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  Inserts link to explainxkcd.com on each page
+// @author       You
+// @match        https://xkcd.com/*/
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+    var parser = document.createElement("a");
+    parser.href = window.location;
+    var link = document.createElement("a");
+    link.href = "http://explainxkcd.com"+parser.pathname;
+    link.innerHTML = "Explain this!";
+    var br = document.createElement("br");
+    br.id = "brb";
+    document.querySelector(".comicNav").parentNode.appendChild(br);
+    document.querySelector("#brb").parentNode.appendChild(link);
+})();
